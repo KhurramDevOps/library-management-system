@@ -109,9 +109,7 @@ const me = async (req, res, next) => {
       return sendResponse(res, 404, false, 'User not found');
     }
 
-    return sendResponse(res, 200, true, 'Profile fetched successfully', {
-      user: formatUser(user),
-    });
+    return sendResponse(res, 200, true, 'Profile fetched successfully', formatUser(user));
   } catch (error) {
     return next(error);
   }

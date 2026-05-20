@@ -39,23 +39,19 @@ const issueRecordSchema = new mongoose.Schema({
   },
 });
 
-issueRecordSchema.pre('validate', function setDueDate(next) {
+issueRecordSchema.pre('validate', function setDueDate() {
   if (!this.dueDate) {
     const issueDate = this.issueDate || new Date();
     this.dueDate = new Date(issueDate.getTime() + 14 * 24 * 60 * 60 * 1000);
   }
-
-  next();
 });
 
-issueRecordSchema.pre('save', function calculateFine(next) {
+issueRecordSchema.pre('save', function calculateFine() {
   if (this.returnDate && this.dueDate && this.returnDate > this.dueDate) {
     const msPerDay = 24 * 60 * 60 * 1000;
     const overdueDays = Math.ceil((this.returnDate - this.dueDate) / msPerDay);
     this.fine = overdueDays * 5;
   }
-
-  next();
 });
 
 module.exports = mongoose.model('IssueRecord', issueRecordSchema);

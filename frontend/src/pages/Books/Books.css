@@ -1,0 +1,157 @@
+.page-toolbar,
+.filter-card,
+.pagination-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-toolbar {
+  margin-bottom: 1.4rem;
+}
+
+.page-toolbar h1 {
+  margin: 0;
+}
+
+.page-toolbar p {
+  color: var(--text-secondary);
+  margin: 0.2rem 0 0;
+}
+
+.filter-card {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-card .form-control {
+  flex: 1;
+}
+
+.filter-card .form-select {
+  max-width: 240px;
+}
+
+.filter-card span,
+.pagination-row span {
+  color: var(--text-secondary);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.book-card {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+.book-card-top {
+  height: 8px;
+}
+
+.book-card-body {
+  padding: 1.1rem;
+}
+
+.book-category {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  background: #f3f5fa;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+}
+
+.book-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.12rem;
+  min-height: 2.7rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.copy-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.copy-track {
+  height: 7px;
+  background: #eef0f5;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.copy-track span {
+  height: 100%;
+  display: block;
+}
+
+.book-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.danger-hover:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.pagination-row {
+  margin-top: 1.5rem;
+}
+
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,46,0.6);
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.confirm-modal {
+  width: min(100%, 460px);
+  padding: 1.5rem;
+}
+
+.confirm-modal h3,
+.form-shell h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+.form-shell {
+  padding: 1.4rem;
+}
+
+@media (max-width: 768px) {
+  .page-toolbar,
+  .filter-card,
+  .pagination-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-card .form-select {
+    max-width: 100%;
+  }
+}

@@ -27,7 +27,7 @@ const issueBook = async (req, res, next) => {
     ]);
 
     if (!book || book.availableCopies < 1) {
-      return sendResponse(res, 400, false, 'Book is unavailable');
+      return sendResponse(res, 400, false, book ? 'No copies available' : 'Book not found');
     }
 
     if (!student || !student.isActive) {
@@ -67,7 +67,7 @@ const issueBook = async (req, res, next) => {
       .populate('student', 'name rollNumber')
       .populate('issuedBy', 'name email role');
 
-    return sendResponse(res, 201, true, 'Book issued successfully', { issue: populatedIssue });
+    return sendResponse(res, 201, true, 'Book issued successfully', populatedIssue);
   } catch (error) {
     return next(error);
   }
@@ -98,10 +98,7 @@ const returnBook = async (req, res, next) => {
       .populate('student', 'name rollNumber')
       .populate('issuedBy', 'name email role');
 
-    return sendResponse(res, 200, true, 'Book returned successfully', {
-      issue: populatedIssue,
-      fine: issue.fine,
-    });
+    return sendResponse(res, 200, true, 'Book returned successfully', populatedIssue);
   } catch (error) {
     return next(error);
   }
@@ -140,6 +137,7 @@ const getIssues = async (req, res, next) => {
 
     return sendResponse(res, 200, true, 'Issues fetched successfully', {
       issues,
+      total,
       pagination: { page, limit, total, pages: Math.ceil(total / limit) },
     });
   } catch (error) {

@@ -40,6 +40,7 @@ const getStudents = async (req, res, next) => {
 
     return sendResponse(res, 200, true, 'Students fetched successfully', {
       students,
+      total,
       pagination: { page, limit, total, pages: Math.ceil(total / limit) },
     });
   } catch (error) {
@@ -89,7 +90,7 @@ const createStudent = async (req, res, next) => {
       department: req.body.department,
     });
 
-    return sendResponse(res, 201, true, 'Student created successfully', { student });
+    return sendResponse(res, 201, true, 'Student created successfully', student);
   } catch (error) {
     return next(error);
   }
@@ -121,7 +122,7 @@ const updateStudent = async (req, res, next) => {
       return sendResponse(res, 404, false, 'Student not found');
     }
 
-    return sendResponse(res, 200, true, 'Student updated successfully', { student });
+    return sendResponse(res, 200, true, 'Student updated successfully', student);
   } catch (error) {
     return next(error);
   }
@@ -146,7 +147,7 @@ const deleteStudent = async (req, res, next) => {
       return sendResponse(res, 404, false, 'Student not found');
     }
 
-    return sendResponse(res, 200, true, 'Student deleted successfully', { student });
+    return sendResponse(res, 200, true, 'Student deleted successfully', student);
   } catch (error) {
     return next(error);
   }

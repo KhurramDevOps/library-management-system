@@ -46,6 +46,7 @@ const getBooks = async (req, res, next) => {
 
     return sendResponse(res, 200, true, 'Books fetched successfully', {
       books,
+      total,
       pagination: { page, limit, total, pages: Math.ceil(total / limit) },
     });
   } catch (error) {
@@ -63,7 +64,7 @@ const getBookById = async (req, res, next) => {
       return sendResponse(res, 404, false, 'Book not found');
     }
 
-    return sendResponse(res, 200, true, 'Book fetched successfully', { book });
+    return sendResponse(res, 200, true, 'Book fetched successfully', book);
   } catch (error) {
     return next(error);
   }
@@ -90,7 +91,7 @@ const createBook = async (req, res, next) => {
       publishedYear: req.body.publishedYear,
     });
 
-    return sendResponse(res, 201, true, 'Book created successfully', { book });
+    return sendResponse(res, 201, true, 'Book created successfully', book);
   } catch (error) {
     return next(error);
   }
@@ -132,7 +133,7 @@ const updateBook = async (req, res, next) => {
     }
 
     await book.save();
-    return sendResponse(res, 200, true, 'Book updated successfully', { book });
+    return sendResponse(res, 200, true, 'Book updated successfully', book);
   } catch (error) {
     return next(error);
   }
@@ -157,7 +158,7 @@ const deleteBook = async (req, res, next) => {
       return sendResponse(res, 404, false, 'Book not found');
     }
 
-    return sendResponse(res, 200, true, 'Book deleted successfully', { book });
+    return sendResponse(res, 200, true, 'Book deleted successfully', book);
   } catch (error) {
     return next(error);
   }

@@ -16,6 +16,12 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+const normalizeOrigin = (origin) => origin.replace(/\/+$/, '');
+const allowedOrigins = (process.env.CLIENT_URL || '*')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+  .map((origin) => (origin === '*' ? origin : normalizeOrigin(origin)));
 
 connectDB().catch((error) => {
   console.error(`MongoDB connection failed: ${error.message}`);
@@ -23,7 +29,15 @@ connectDB().catch((error) => {
 });
 
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL || '*' }));
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(normalizeOrigin(origin))) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 

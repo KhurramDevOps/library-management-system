@@ -15,7 +15,7 @@ const sendResponse = require('./utils/sendResponse');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 connectDB().catch((error) => {
   console.error(`MongoDB connection failed: ${error.message}`);
